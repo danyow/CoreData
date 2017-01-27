@@ -7,22 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F414402A1E3AC48D00F99534 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F41440271E3AC48D00F99534 /* AppDelegate.m */; };
+		F414402D1E3AC4FB00F99534 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F414402C1E3AC4FB00F99534 /* MainViewController.m */; };
+		F414402F1E3AC50600F99534 /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F414402E1E3AC50600F99534 /* MainViewController.storyboard */; };
+		F41440321E3AC57500F99534 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F41440311E3AC57500F99534 /* CoreDataHelper.m */; };
 		F4978D511E3ABBC400B825CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4978D501E3ABBC400B825CC /* main.m */; };
-		F4978D541E3ABBC400B825CC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4978D531E3ABBC400B825CC /* AppDelegate.m */; };
-		F4978D571E3ABBC400B825CC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4978D561E3ABBC400B825CC /* ViewController.m */; };
-		F4978D5A1E3ABBC400B825CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4978D581E3ABBC400B825CC /* Main.storyboard */; };
 		F4978D5C1E3ABBC400B825CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4978D5B1E3ABBC400B825CC /* Assets.xcassets */; };
 		F4978D5F1E3ABBC400B825CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4978D5D1E3ABBC400B825CC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F41440261E3AC48D00F99534 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F41440271E3AC48D00F99534 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F414402B1E3AC4FB00F99534 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F414402C1E3AC4FB00F99534 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F414402E1E3AC50600F99534 /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
+		F41440301E3AC57500F99534 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		F41440311E3AC57500F99534 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		F41440331E3AC6BB00F99534 /* CoreData.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreData.pch; sourceTree = "<group>"; };
 		F4978D4C1E3ABBC400B825CC /* CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4978D501E3ABBC400B825CC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F4978D521E3ABBC400B825CC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F4978D531E3ABBC400B825CC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F4978D551E3ABBC400B825CC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F4978D561E3ABBC400B825CC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F4978D591E3ABBC400B825CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4978D5B1E3ABBC400B825CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4978D5E1E3ABBC400B825CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4978D601E3ABBC400B825CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,6 +43,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F41440211E3AC48D00F99534 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F414402B1E3AC4FB00F99534 /* MainViewController.h */,
+				F414402C1E3AC4FB00F99534 /* MainViewController.m */,
+				F414402E1E3AC50600F99534 /* MainViewController.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F41440241E3AC48D00F99534 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F41440301E3AC57500F99534 /* CoreDataHelper.h */,
+				F41440311E3AC57500F99534 /* CoreDataHelper.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F41440251E3AC48D00F99534 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				F41440261E3AC48D00F99534 /* AppDelegate.h */,
+				F41440271E3AC48D00F99534 /* AppDelegate.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		F41440281E3AC48D00F99534 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F4978D431E3ABBC400B825CC = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +97,10 @@
 		F4978D4E1E3ABBC400B825CC /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				F4978D521E3ABBC400B825CC /* AppDelegate.h */,
-				F4978D531E3ABBC400B825CC /* AppDelegate.m */,
-				F4978D551E3ABBC400B825CC /* ViewController.h */,
-				F4978D561E3ABBC400B825CC /* ViewController.m */,
-				F4978D581E3ABBC400B825CC /* Main.storyboard */,
-				F4978D5B1E3ABBC400B825CC /* Assets.xcassets */,
-				F4978D5D1E3ABBC400B825CC /* LaunchScreen.storyboard */,
-				F4978D601E3ABBC400B825CC /* Info.plist */,
+				F41440211E3AC48D00F99534 /* Controller */,
+				F41440241E3AC48D00F99534 /* Model */,
+				F41440251E3AC48D00F99534 /* Other */,
+				F41440281E3AC48D00F99534 /* View */,
 				F4978D4F1E3ABBC400B825CC /* Supporting Files */,
 			);
 			path = CoreData;
@@ -74,7 +109,11 @@
 		F4978D4F1E3ABBC400B825CC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4978D5D1E3ABBC400B825CC /* LaunchScreen.storyboard */,
+				F4978D5B1E3ABBC400B825CC /* Assets.xcassets */,
+				F4978D601E3ABBC400B825CC /* Info.plist */,
 				F4978D501E3ABBC400B825CC /* main.m */,
+				F41440331E3AC6BB00F99534 /* CoreData.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -105,6 +144,7 @@
 		F4978D441E3ABBC400B825CC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Danyow.Ed;
 				TargetAttributes = {
@@ -139,8 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4978D5F1E3ABBC400B825CC /* LaunchScreen.storyboard in Resources */,
+				F414402F1E3AC50600F99534 /* MainViewController.storyboard in Resources */,
 				F4978D5C1E3ABBC400B825CC /* Assets.xcassets in Resources */,
-				F4978D5A1E3ABBC400B825CC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,23 +191,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4978D571E3ABBC400B825CC /* ViewController.m in Sources */,
-				F4978D541E3ABBC400B825CC /* AppDelegate.m in Sources */,
 				F4978D511E3ABBC400B825CC /* main.m in Sources */,
+				F414402D1E3AC4FB00F99534 /* MainViewController.m in Sources */,
+				F41440321E3AC57500F99534 /* CoreDataHelper.m in Sources */,
+				F414402A1E3AC48D00F99534 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F4978D581E3ABBC400B825CC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4978D591E3ABBC400B825CC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F4978D5D1E3ABBC400B825CC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -272,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72GJ4BTB4F;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CoreData/CoreData.pch";
 				INFOPLIST_FILE = CoreData/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Danyow.Ed.CoreData;
@@ -287,6 +321,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 72GJ4BTB4F;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CoreData/CoreData.pch";
 				INFOPLIST_FILE = CoreData/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Danyow.Ed.CoreData;

@@ -1,0 +1,23 @@
+//
+//  CoreData.pch
+//  CoreData
+//
+//  Created by Danyow.Ed on 2017/1/27.
+//  Copyright © 2017年 Danyow.Ed. All rights reserved.
+//
+
+#ifndef CoreData_pch
+#define CoreData_pch
+
+#if DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"🚩%s \n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+//#define NSLog(FORMAT, ...) fprintf(stderr,"🚩%s  (🔍%s %d)\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String], __FUNCTION__, __LINE__);
+#else
+#define NSLog(FORMAT, ...) nil
+#endif
+
+#define NSMustLog(FORMAT, ...) fprintf(stderr,"🚩%s \n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+#define CoreDataLog NSLog(@"运行中... %@ %@", self.class, NSStringFromSelector(_cmd))
+
+#endif /* CoreData_pch */
