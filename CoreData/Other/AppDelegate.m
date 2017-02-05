@@ -23,15 +23,13 @@
 - (void)demo
 {
     CoreDataLog;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    
+    /** 创建的时候采用请求模板来创建请求对象 */
+    NSFetchRequest *request = [[[self.helper model] fetchRequestTemplateForName:@"FindFE"] copy];
     
     /** 排序 */
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     [request setSortDescriptors:@[sort]];
-    
-    /** 谓词 */
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"name == %@", @"Coffee"];
-    [request setPredicate:filter];
     
     NSArray *fetchedObjects = [self.helper.context executeFetchRequest:request error:nil];
     for (Item *item in fetchedObjects) {
