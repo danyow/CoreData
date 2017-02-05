@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
 #import "Item+CoreDataProperties.h"
+#import "Measurement+CoreDataProperties.h"
 
 @interface AppDelegate ()
 
@@ -23,14 +24,12 @@
 - (void)demo
 {
     CoreDataLog;
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    
-    NSArray *fetchedObjects = [self.helper.context executeFetchRequest:request error:nil];
-    for (Item *item in fetchedObjects) {
-        NSLog(@"找到了已经存储对象%@", item.name);
-        [self.helper.context deleteObject:item];
+    for (int i = 0; i < 50000; ++i) {
+        Measurement *newMeasurement = [NSEntityDescription insertNewObjectForEntityForName:@"Measurement" inManagedObjectContext:self.helper.context];
+        newMeasurement.abc = [NSString stringWithFormat:@"LOTS OF TEST DATA x%i", i];
+        NSLog(@"插入%@", newMeasurement.abc);
     }
+    [self.helper saveContext];
 }
 
 #pragma mark -  life cycle

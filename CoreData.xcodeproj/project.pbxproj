@@ -32,6 +32,7 @@
 		F4978D5E1E3ABBC400B825CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4978D601E3ABBC400B825CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F720F84E1E471CF5008B0084 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,9 +363,10 @@
 		F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */,
 				F720F84E1E471CF5008B0084 /* Model.xcdatamodel */,
 			);
-			currentVersion = F720F84E1E471CF5008B0084 /* Model.xcdatamodel */;
+			currentVersion = F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
