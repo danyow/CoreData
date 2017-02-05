@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
+#import "Item+CoreDataProperties.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,20 @@
 
 @implementation AppDelegate
 
+#pragma mark -  Demo method
+
+- (void)demo
+{
+    CoreDataLog;
+    NSArray *newItemNames = @[@"Apples", @"Milks", @"Bread", @"Cheese", @"Sausages", @"Butter", @"Orange Juice", @"Cereal", @"Coffee", @"Eggs", @"Tomatoes", @"Fish"];
+    for (NSString *newItemName in newItemNames) {
+        Item *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.helper.context];
+        newItem.name = newItemName;
+        NSLog(@"插入一个新的存储对象%@", newItem.name);
+    }
+}
+
+#pragma mark -  life cycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -47,7 +62,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    
+    CoreDataLog;
+    [self demo];
 }
 
 /**

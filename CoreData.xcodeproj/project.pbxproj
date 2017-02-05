@@ -14,6 +14,7 @@
 		F4978D511E3ABBC400B825CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4978D501E3ABBC400B825CC /* main.m */; };
 		F4978D5C1E3ABBC400B825CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4978D5B1E3ABBC400B825CC /* Assets.xcassets */; };
 		F4978D5F1E3ABBC400B825CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4978D5D1E3ABBC400B825CC /* LaunchScreen.storyboard */; };
+		F720F84F1E471CF5008B0084 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F4978D5B1E3ABBC400B825CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4978D5E1E3ABBC400B825CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4978D601E3ABBC400B825CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F720F84E1E471CF5008B0084 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				F41440301E3AC57500F99534 /* CoreDataHelper.h */,
 				F41440311E3AC57500F99534 /* CoreDataHelper.m */,
+				F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				F4978D511E3ABBC400B825CC /* main.m in Sources */,
 				F414402D1E3AC4FB00F99534 /* MainViewController.m in Sources */,
+				F720F84F1E471CF5008B0084 /* Model.xcdatamodeld in Sources */,
 				F41440321E3AC57500F99534 /* CoreDataHelper.m in Sources */,
 				F414402A1E3AC48D00F99534 /* AppDelegate.m in Sources */,
 			);
@@ -353,6 +357,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F720F84E1E471CF5008B0084 /* Model.xcdatamodel */,
+			);
+			currentVersion = F720F84E1E471CF5008B0084 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F4978D441E3ABBC400B825CC /* Project object */;
 }

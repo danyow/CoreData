@@ -85,7 +85,10 @@ NSString * storeFilename = @"CoreData.sqlite";
         return;
     }
     NSError *error = nil;
-    self.store = [self.coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:nil error:&error];
+    
+    /** 这个Option的用处就是删除掉-wal文件 */
+    NSDictionary *option = @{NSSQLitePragmasOption : @{@"journal_mode" : @"DELETE"}};
+    self.store = [self.coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:option error:&error];
     if (!error) {
         NSLog(@"添加存储区成功");
     } else {
