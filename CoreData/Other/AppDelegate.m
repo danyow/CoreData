@@ -24,12 +24,17 @@
 - (void)demo
 {
     CoreDataLog;
-    for (int i = 0; i < 50000; ++i) {
-        Measurement *newMeasurement = [NSEntityDescription insertNewObjectForEntityForName:@"Measurement" inManagedObjectContext:self.helper.context];
-        newMeasurement.abc = [NSString stringWithFormat:@"LOTS OF TEST DATA x%i", i];
-        NSLog(@"插入%@", newMeasurement.abc);
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Measurement"];
+    [request setFetchLimit:50];
+    NSError *error = nil;
+    NSArray *fetchObjects = [self.helper.context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+    } else {
+        for (Measurement *measurement in fetchObjects) {
+            NSLog(@"找到存储对象%@", measurement.abc);
+        }
     }
-    [self.helper saveContext];
 }
 
 #pragma mark -  life cycle
