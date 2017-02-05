@@ -23,11 +23,19 @@
 - (void)demo
 {
     CoreDataLog;
-    NSArray *newItemNames = @[@"Apples", @"Milks", @"Bread", @"Cheese", @"Sausages", @"Butter", @"Orange Juice", @"Cereal", @"Coffee", @"Eggs", @"Tomatoes", @"Fish"];
-    for (NSString *newItemName in newItemNames) {
-        Item *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.helper.context];
-        newItem.name = newItemName;
-        NSLog(@"插入一个新的存储对象%@", newItem.name);
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    
+    /** 排序 */
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:@[sort]];
+    
+    /** 谓词 */
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"name == %@", @"Coffee"];
+    [request setPredicate:filter];
+    
+    NSArray *fetchedObjects = [self.helper.context executeFetchRequest:request error:nil];
+    for (Item *item in fetchedObjects) {
+        NSLog(@"找到了已经存储对象%@", item.name);
     }
 }
 
