@@ -24,16 +24,12 @@
 {
     CoreDataLog;
     
-    /** 创建的时候采用请求模板来创建请求对象 */
-    NSFetchRequest *request = [[[self.helper model] fetchRequestTemplateForName:@"FindFE"] copy];
-    
-    /** 排序 */
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    [request setSortDescriptors:@[sort]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
     
     NSArray *fetchedObjects = [self.helper.context executeFetchRequest:request error:nil];
     for (Item *item in fetchedObjects) {
         NSLog(@"找到了已经存储对象%@", item.name);
+        [self.helper.context deleteObject:item];
     }
 }
 
