@@ -22,22 +22,31 @@
 
 - (void)demo
 {
-    CoreDataLog;
-    Unit *kg = [NSEntityDescription insertNewObjectForEntityForName:@"Unit" inManagedObjectContext:self.helper.context];
-    Item *oranges = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.helper.context];
-    Item *bananas = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.helper.context];
-    kg.name = @"Kg";
-    oranges.name = @"Oranges";
-    bananas.name = @"Bananas";
-    oranges.quantity = 1;
-    bananas.quantity = 4;
-    oranges.listed = YES;
-    bananas.listed = YES;
-    oranges.unit = kg;
-    bananas.unit = kg;
-    NSLog(@"插入模型： %.1f%@ %@", oranges.quantity, oranges.unit.name, oranges.name);
-    NSLog(@"插入模型： %.1f%@ %@", bananas.quantity, bananas.unit.name, bananas.name);
-    [self.helper saveContext];
+    [self showUnitAndItemCount];
+}
+
+- (void)showUnitAndItemCount
+{
+    ///MARK:  列出多少个Items在数据库里面
+    NSFetchRequest *items = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    NSError *itemsError = nil;
+    NSArray *fetchedItems = [self.helper.context executeFetchRequest:items error:&itemsError];
+    if (!fetchedItems) {
+        NSLog(@"%@", itemsError);
+    } else {
+        NSLog(@"找到了%lu个Item", fetchedItems.count);
+    }
+    
+    ///MARK:  列出多少个Units在数据库里面
+    NSFetchRequest *units = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
+    NSError *unitsError = nil;
+    NSArray *fetchedUnits = [self.helper.context executeFetchRequest:units error:&unitsError];
+    if (!fetchedUnits) {
+        NSLog(@"%@", unitsError);
+    } else {
+        NSLog(@"找到了%lu个Unit", fetchedUnits.count);
+    }
+    
 }
 
 #pragma mark -  life cycle
