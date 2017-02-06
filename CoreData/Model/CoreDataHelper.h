@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "MigrationViewController.h"
+
 @interface CoreDataHelper : NSObject
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext       *context;
@@ -19,5 +21,7 @@
 + (instancetype)shareHelper;
 - (void)setupCoreData;
 - (void)saveContext;
+
+@property (nonatomic, strong) MigrationViewController *migrationVC;
 
 @end

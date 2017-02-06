@@ -84,18 +84,23 @@ NSString * storeFilename = @"CoreData.sqlite";
     if (self.store) {
         return;
     }
-    NSError *error = nil;
     
-    /** 这个Option的用处就是删除掉-wal文件 */
-    NSDictionary *option =
-  @{NSSQLitePragmasOption : @{@"journal_mode" : @"DELETE"},
-    NSMigratePersistentStoresAutomaticallyOption : @YES,
-    NSInferMappingModelAutomaticallyOption : @YES};
-    self.store = [self.coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:option error:&error];
-    if (!error) {
-        NSLog(@"添加存储区成功");
+    BOOL userMigrationManager = YES;
+    if (userMigrationManager && [self isMigrationNecessaryForStore:[self storeURL]]) {
+        [self performBackgroundManagedMigrationForStore:[self storeURL]];
     } else {
-        NSMustLog(@"添加存储区失败 %@", error);
+        /** 这个Option的用处就是删除掉-wal文件 */
+        NSDictionary *option =
+        @{NSSQLitePragmasOption : @{@"journal_mode" : @"DELETE"},
+          NSMigratePersistentStoresAutomaticallyOption : @YES,
+          NSInferMappingModelAutomaticallyOption : @YES};
+        NSError *error = nil;
+        self.store = [self.coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:option error:&error];
+        if (!error) {
+            NSLog(@"添加存储区成功");
+        } else {
+            NSMustLog(@"添加存储区失败 %@", error);
+        }
     }
 }
 
@@ -128,6 +133,122 @@ NSString * storeFilename = @"CoreData.sqlite";
 {
     CoreDataLog;
     return [[self applicationStoreDicretory] URLByAppendingPathComponent:storeFilename];
+}
+
+#pragma mark -  Migration manager
+
+- (BOOL)isMigrationNecessaryForStore:(NSURL *)storeURL
+{
+    CoreDataLog;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self storeURL].path]) {
+        NSLog(@"跳过迁移, 数据文件缺失");
+        return NO;
+    }
+    NSError *error = nil;
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL options:nil error:&error];
+    NSManagedObjectModel *destinationModel = self.coordinator.managedObjectModel;
+    if ([destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata]) {
+        NSLog(@"跳过迁移, 数据以前迁移完毕");
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)migrationStore:(NSURL *)sourceStore
+{
+    CoreDataLog;
+    BOOL success = NO;
+    NSError *error = nil;
+    ///MARK:  第一步：收集数据-> 元数据、源模型、目标模型、映射模型
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:sourceStore options:nil error:&error];
+    NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
+    NSManagedObjectModel *destinModel = self.model;
+    NSMappingModel *mappingModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinModel];
+    ///MARK:  第二步：执行迁移，同时确定在映射模型不为空的前提下
+    if (mappingModel) {
+        NSError *error = nil;
+        NSMigrationManager *migrationManager = [[NSMigrationManager alloc] initWithSourceModel:sourceModel destinationModel:destinModel];
+        [migrationManager addObserver:self forKeyPath:@"migrationProgress" options:NSKeyValueObservingOptionNew context:NULL];
+        NSURL *destinStore = [[self applicationStoreDicretory] URLByAppendingPathComponent:@"Temp.sqlite"];
+        success = [migrationManager migrateStoreFromURL:sourceStore type:NSSQLiteStoreType options:nil withMappingModel:mappingModel toDestinationURL:destinStore destinationType:NSSQLiteStoreType destinationOptions:nil error:&error];
+        if (success) {
+            ///MARK:  第三步：替换老的存储空间到新的迁移存储空间 自定义方法
+            if ([self replaceStore:sourceStore withStore:destinStore]) {
+                NSLog(@"成功迁移%@到当前模型", sourceStore.path);
+                [migrationManager removeObserver:self forKeyPath:@"migrationProgress"];
+            }
+        } else {
+            NSLog(@"迁移失败%@", error);
+        }
+    } else {
+        NSLog(@"迁移失败，Mapping 模型为空");
+    }
+    return YES;
+}
+
+- (BOOL)replaceStore:(NSURL *)old withStore:(NSURL *)new
+{
+    BOOL success = NO;
+    NSError *error = nil;
+    ///MARK:  这里是可以备份老的存储空间的
+    if ([[NSFileManager defaultManager] removeItemAtURL:old error:&error]) {
+        error = nil;
+        if ([[NSFileManager defaultManager] moveItemAtURL:new toURL:old error:&error]) {
+            success = YES;
+        } else {
+            NSLog(@"新的存储空间替换老的存储空间失败%@", error);
+        }
+    } else {
+        NSLog(@"删除老的存储空间失败%@", error);
+    }
+    return success;
+}
+
+#pragma mark -  event handle
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"migrationProgress"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            float progress = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+            self.migrationVC.progressView.progress = progress;
+            int percentage = progress * 100;
+            NSString *string = [NSString stringWithFormat:@"%i%%", percentage];
+            NSLog(@"%@", string);
+            self.migrationVC.progressLabel.text = string;
+        });
+    }
+}
+
+- (void)performBackgroundManagedMigrationForStore:(NSURL *)storeURL
+{
+    CoreDataLog;
+    ///MARK:  展示迁移进度 防止用户使用这个App
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:NSStringFromClass([MigrationViewController class]) bundle:nil];
+    self.migrationVC = sb.instantiateInitialViewController;
+    UIApplication *application = [UIApplication sharedApplication];
+    UINavigationController *nc = (UINavigationController *)application.keyWindow.rootViewController;
+    [nc presentViewController:self.migrationVC animated:YES completion:nil];
+    
+    ///MARK:  在后台执行迁移，所以他不会冻结UI, 这是一种可以展现进度给用户的方法
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        BOOL done = [self migrationStore:storeURL];
+        if (done) {
+            ///MARK:  当迁移完成，添加新的迁移存储空间
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error = nil;
+                self.store = [self.coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:nil error:&error];
+                if (!self.store) {
+                    NSLog(@"添加迁移的存储空间失败%@", error);
+                    abort();
+                } else {
+                    NSLog(@"添加迁移的存储空间成功%@", self.store);
+                }
+                [self.migrationVC dismissViewControllerAnimated:NO completion:nil];
+                self.migrationVC = nil;
+            });
+        }
+    });
 }
 
 @end

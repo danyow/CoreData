@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="swi-xl-Q0Q">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Migration View Controller-->
+        <scene sceneID="Qes-qB-M8y">
+            <objects>
+                <viewController id="swi-xl-Q0Q" customClass="MigrationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nZo-k3-DNT"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lk0-Am-Jlv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DhX-1r-xsG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="迁移进度 0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reP-eB-Tpn">
+                                <rect key="frame" x="139" y="295.5" width="97" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="79C-um-K4E">
+                                <rect key="frame" x="36" y="332.5" width="303" height="2"/>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="79C-um-K4E" firstAttribute="leading" secondItem="DhX-1r-xsG" secondAttribute="leadingMargin" constant="20" id="6eE-2U-DV4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="79C-um-K4E" secondAttribute="trailing" constant="20" id="8hb-Gm-8I6"/>
+                            <constraint firstItem="79C-um-K4E" firstAttribute="centerY" secondItem="DhX-1r-xsG" secondAttribute="centerY" id="g5V-Eg-Oam"/>
+                            <constraint firstItem="reP-eB-Tpn" firstAttribute="centerX" secondItem="79C-um-K4E" secondAttribute="centerX" id="lst-WE-Gms"/>
+                            <constraint firstItem="79C-um-K4E" firstAttribute="top" secondItem="reP-eB-Tpn" secondAttribute="bottom" constant="16" id="rYJ-Ij-x4v"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progressLabel" destination="reP-eB-Tpn" id="y1F-Q8-Rpb"/>
+                        <outlet property="progressView" destination="79C-um-K4E" id="nng-Mb-aOW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0eW-rF-AO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="78" y="139"/>
+        </scene>
+    </scenes>
+</document>
