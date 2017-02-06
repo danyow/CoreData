@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
 #import "Item+CoreDataProperties.h"
-#import "Unit+CoreDataProperties.h"
+#import "Test+CoreDataProperties.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CoreDataHelper *helper;
@@ -23,15 +23,15 @@
 - (void)demo
 {
     CoreDataLog;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Test"];
     [request setFetchLimit:50];
     NSError *error = nil;
     NSArray *fectchObjects = [self.helper.context executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"失败了%@", error);
     } else {
-        for (Unit *unit in fectchObjects) {
-            NSLog(@"迁移数据成功 找到了-->%@", unit.name);
+        for (Test *test in fectchObjects) {
+            NSLog(@"迁移数据成功 找到了-->%@", test.xxx);
         }
     }
 }
