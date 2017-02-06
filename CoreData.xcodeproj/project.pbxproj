@@ -15,6 +15,7 @@
 		F4978D5C1E3ABBC400B825CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4978D5B1E3ABBC400B825CC /* Assets.xcassets */; };
 		F4978D5F1E3ABBC400B825CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4978D5D1E3ABBC400B825CC /* LaunchScreen.storyboard */; };
 		F720F84F1E471CF5008B0084 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */; };
+		F720F85F1E4730B7008B0084 /* Model2ToModel3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F720F85E1E4730B7008B0084 /* Model2ToModel3.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		F4978D601E3ABBC400B825CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F720F84E1E471CF5008B0084 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		F720F85D1E47303C008B0084 /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
+		F720F85E1E4730B7008B0084 /* Model2ToModel3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model2ToModel3.xcmappingmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,7 @@
 				F41440301E3AC57500F99534 /* CoreDataHelper.h */,
 				F41440311E3AC57500F99534 /* CoreDataHelper.m */,
 				F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */,
+				F720F85E1E4730B7008B0084 /* Model2ToModel3.xcmappingmodel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4978D511E3ABBC400B825CC /* main.m in Sources */,
+				F720F85F1E4730B7008B0084 /* Model2ToModel3.xcmappingmodel in Sources */,
 				F414402D1E3AC4FB00F99534 /* MainViewController.m in Sources */,
 				F720F84F1E471CF5008B0084 /* Model.xcdatamodeld in Sources */,
 				F41440321E3AC57500F99534 /* CoreDataHelper.m in Sources */,
@@ -363,10 +368,11 @@
 		F720F84D1E471CF5008B0084 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F720F85D1E47303C008B0084 /* Model 3.xcdatamodel */,
 				F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */,
 				F720F84E1E471CF5008B0084 /* Model.xcdatamodel */,
 			);
-			currentVersion = F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */;
+			currentVersion = F720F85D1E47303C008B0084 /* Model 3.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

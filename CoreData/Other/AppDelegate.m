@@ -9,8 +9,7 @@
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
 #import "Item+CoreDataProperties.h"
-#import "Measurement+CoreDataProperties.h"
-
+#import "Amount+CoreDataProperties.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CoreDataHelper *helper;
@@ -24,15 +23,15 @@
 - (void)demo
 {
     CoreDataLog;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Measurement"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Amount"];
     [request setFetchLimit:50];
     NSError *error = nil;
-    NSArray *fetchObjects = [self.helper.context executeFetchRequest:request error:&error];
+    NSArray *fectchObjects = [self.helper.context executeFetchRequest:request error:&error];
     if (error) {
-        NSLog(@"%@", error);
+        NSLog(@"失败了%@", error);
     } else {
-        for (Measurement *measurement in fetchObjects) {
-            NSLog(@"找到存储对象%@", measurement.abc);
+        for (Amount *amount in fectchObjects) {
+            NSLog(@"迁移数据成功 找到了-->%@", amount.xyz);
         }
     }
 }
