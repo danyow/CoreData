@@ -85,7 +85,7 @@ NSString * storeFilename = @"CoreData.sqlite";
         return;
     }
     
-    BOOL userMigrationManager = YES;
+    BOOL userMigrationManager = NO;
     if (userMigrationManager && [self isMigrationNecessaryForStore:[self storeURL]]) {
         [self performBackgroundManagedMigrationForStore:[self storeURL]];
     } else {

@@ -394,7 +394,7 @@
 				F720F85C1E472BE8008B0084 /* Model 2.xcdatamodel */,
 				F720F84E1E471CF5008B0084 /* Model.xcdatamodel */,
 			);
-			currentVersion = F7EB30811E484F3200EB5AD0 /* Model 5.xcdatamodel */;
+			currentVersion = F7EB30861E48500500EB5AD0 /* Model 6.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

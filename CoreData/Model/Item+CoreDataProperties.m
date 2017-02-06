@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.m
 //  CoreData
 //
-//  Created by Danyow on 2017/2/5.
+//  Created by Danyow on 2017/2/6.
 //  Copyright © 2017年 Danyow.Ed. All rights reserved.
 //  This file was automatically generated and should not be edited.
 //
@@ -15,10 +15,11 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Item"];
 }
 
-@dynamic name;
-@dynamic quantity;
-@dynamic photoData;
-@dynamic listed;
 @dynamic collected;
+@dynamic listed;
+@dynamic name;
+@dynamic photoData;
+@dynamic quantity;
+@dynamic unit;
 
 @end

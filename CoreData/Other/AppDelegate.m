@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
 #import "Item+CoreDataProperties.h"
-#import "Test+CoreDataProperties.h"
+#import "Unit+CoreDataProperties.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CoreDataHelper *helper;
@@ -23,17 +23,21 @@
 - (void)demo
 {
     CoreDataLog;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Test"];
-    [request setFetchLimit:50];
-    NSError *error = nil;
-    NSArray *fectchObjects = [self.helper.context executeFetchRequest:request error:&error];
-    if (error) {
-        NSLog(@"失败了%@", error);
-    } else {
-        for (Test *test in fectchObjects) {
-            NSLog(@"迁移数据成功 找到了-->%@", test.xxx);
-        }
-    }
+    Unit *kg = [NSEntityDescription insertNewObjectForEntityForName:@"Unit" inManagedObjectContext:self.helper.context];
+    Item *oranges = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.helper.context];
+    Item *bananas = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.helper.context];
+    kg.name = @"Kg";
+    oranges.name = @"Oranges";
+    bananas.name = @"Bananas";
+    oranges.quantity = 1;
+    bananas.quantity = 4;
+    oranges.listed = YES;
+    bananas.listed = YES;
+    oranges.unit = kg;
+    bananas.unit = kg;
+    NSLog(@"插入模型： %.1f%@ %@", oranges.quantity, oranges.unit.name, oranges.name);
+    NSLog(@"插入模型： %.1f%@ %@", bananas.quantity, bananas.unit.name, bananas.name);
+    [self.helper saveContext];
 }
 
 #pragma mark -  life cycle
@@ -41,6 +45,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+    NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES));
     return YES;
 }
 
