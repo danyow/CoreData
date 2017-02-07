@@ -29,13 +29,8 @@
     [request setPredicate:filter];
     NSArray *kgUnit = [self.helper.context executeFetchRequest:request error:nil];
     for (Unit *unit in kgUnit) {
-        NSError *error;
-        if ([unit validateForDelete:&error]) {
-            NSLog(@"正在删除%@", unit.name);
-            [self.helper.context deleteObject:unit];
-        } else {
-            NSLog(@"删除失败->%@ 错误原因->%@", unit.name, error.localizedDescription);
-        }
+        [self.helper.context deleteObject:unit];
+        NSLog(@"一个Kg单位对象已经删除完毕");
     }
     NSLog(@"在删除单位对象之后");
     [self showUnitAndItemCount];
@@ -63,7 +58,6 @@
     } else {
         NSLog(@"找到了%lu个Unit", fetchedUnits.count);
     }
-    
 }
 
 #pragma mark -  life cycle

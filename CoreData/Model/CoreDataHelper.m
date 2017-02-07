@@ -48,6 +48,7 @@ NSString * storeFilename = @"CoreData.sqlite";
             NSLog(@"上下文成功保存改动内容到持续存储区");
         } else {
             NSMustLog(@"上下文保存改动内容失败%@", error);
+            [self showValidationError:error];
         }
     } else {
         NSMustLog(@"没有改动内容, 跳过保存");
@@ -133,6 +134,79 @@ NSString * storeFilename = @"CoreData.sqlite";
 {
     CoreDataLog;
     return [[self applicationStoreDicretory] URLByAppendingPathComponent:storeFilename];
+}
+
+#pragma mark -  error handle 
+
+- (void)showValidationError:(NSError *)anError
+{
+    if (anError && [anError.domain isEqualToString:@"NSCocoaErrorDomain"]) {
+        NSArray *errors = nil;
+        NSString *txt = @"";
+        if (anError.code == NSValidationMultipleErrorsError) {
+            errors = [anError.userInfo objectForKey:NSDetailedErrorsKey];
+        } else {
+            errors = [NSArray arrayWithObject:anError];
+        }
+        
+        if (errors && errors.count > 0) {
+            for (NSError *error in errors) {
+                NSString *entity = [[[error.userInfo objectForKey:@"NSValidationErrorObject"] entity] name];
+                NSString *property = [error.userInfo objectForKey:@"NSValidationErrorKey"];
+                switch (error.code) {
+                    case NSValidationRelationshipDeniedDeleteError:
+                        txt = [txt stringByAppendingFormat:@"%@删除不允许，因为还有个关联的%@\n(错误代码：%li)\n\n", entity, property, error.code];
+                        break;
+                    case NSValidationRelationshipLacksMinimumCountError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'关系的数值太小了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationRelationshipExceedsMaximumCountError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'关系的数值太大了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationMissingMandatoryPropertyError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'属性丢失了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationNumberTooSmallError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'数值太小了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationNumberTooLargeError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'数值太大了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationDateTooSoonError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'日期太早了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationDateTooLateError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'日期太晚了\n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationInvalidDateError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'日期无效 \n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationStringTooLongError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'文字太长了 \n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationStringTooShortError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'文字太短了 \n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSValidationStringPatternMatchingError:
+                        txt = [txt stringByAppendingFormat:@"这个'%@'不符合规定样式 \n(错误代码：%li)\n\n", property, error.code];
+                        break;
+                    case NSManagedObjectValidationError:
+                        txt = [txt stringByAppendingFormat:@"发生明确错误 \n(错误代码：%li)\n\n", error.code];
+                        break;
+                    default:
+                        txt = [txt stringByAppendingFormat:@"不能处理的错误类型%li在这个方法里面", error.code];
+                        break;
+                }
+            }
+        }
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"错误出现"
+                                                                       message:txt
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                              handler:^(UIAlertAction * action) {}];
+//        [alert addAction:defaultAction];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark -  Migration manager
