@@ -22,7 +22,19 @@
 
 - (void)demo
 {
+    NSLog(@"在删除单位对象之前");
     [self showUnitAndItemCount];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"name == %@", @"Kg"];
+    [request setPredicate:filter];
+    NSArray *kgUnit = [self.helper.context executeFetchRequest:request error:nil];
+    for (Unit *unit in kgUnit) {
+        [self.helper.context deleteObject:unit];
+        NSLog(@"一个Kg单位对象已经删除完毕");
+    }
+    NSLog(@"在删除单位对象之后");
+    [self showUnitAndItemCount];
+    [self.helper saveContext];
 }
 
 - (void)showUnitAndItemCount
