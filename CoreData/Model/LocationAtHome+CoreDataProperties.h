@@ -1,5 +1,5 @@
 //
-//  Unit+CoreDataProperties.h
+//  LocationAtHome+CoreDataProperties.h
 //  CoreData
 //
 //  Created by Danyow.Ed on 2017/2/8.
@@ -7,21 +7,21 @@
 //  This file was automatically generated and should not be edited.
 //
 
-#import "Unit+CoreDataClass.h"
+#import "LocationAtHome+CoreDataClass.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Unit (CoreDataProperties)
+@interface LocationAtHome (CoreDataProperties)
 
-+ (NSFetchRequest<Unit *> *)fetchRequest;
++ (NSFetchRequest<LocationAtHome *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *name;
+@property (nullable, nonatomic, copy) NSString *storedIn;
 @property (nullable, nonatomic, retain) NSSet<Item *> *items;
 
 @end
 
-@interface Unit (CoreDataGeneratedAccessors)
+@interface LocationAtHome (CoreDataGeneratedAccessors)
 
 - (void)addItemsObject:(Item *)value;
 - (void)removeItemsObject:(Item *)value;

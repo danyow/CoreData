@@ -10,6 +10,7 @@
 #import "CoreDataHelper.h"
 #import "Item+CoreDataProperties.h"
 #import "Unit+CoreDataProperties.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CoreDataHelper *helper;

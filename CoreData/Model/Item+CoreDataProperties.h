@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.h
 //  CoreData
 //
-//  Created by Danyow on 2017/2/6.
+//  Created by Danyow.Ed on 2017/2/8.
 //  Copyright © 2017年 Danyow.Ed. All rights reserved.
 //  This file was automatically generated and should not be edited.
 //
@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSData *photoData;
 @property (nonatomic) float quantity;
 @property (nullable, nonatomic, retain) Unit *unit;
+@property (nullable, nonatomic, retain) LocationAtHome *locationAtHome;
+@property (nullable, nonatomic, retain) LocationAtShop *locationAtShop;
 
 @end
 
